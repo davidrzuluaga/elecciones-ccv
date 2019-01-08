@@ -2,12 +2,12 @@
 
 one:
   name: MyString
-  position: MyString
+  position: one
   group: one
   election: one
 
 two:
   name: MyString
-  position: MyString
+  position: two
   group: two
   election: two
