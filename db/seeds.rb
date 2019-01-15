@@ -1,7 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Election.create(year: 2019)
+Group.create(name: "global", election: Election.last)
+Group.create(name: "10A", election: Election.last)
+Group.create(name: "10B", election: Election.last)
+Voter.create(identification: 123, voted: 0, election: Election.last, group: Group.where(name: "10B").first)
+Voter.create(identification: 456, voted: 0, election: Election.last, group: Group.where(name: "10B").first)
+Voter.create(identification: 321, voted: 0, election: Election.last, group: Group.where(name: "10A").first)
+Voter.create(identification: 654, voted: 0, election: Election.last, group: Group.where(name: "10A").first)
+Position.create(name: "Personero", group: Group.where(name: "global").first)
+Position.create(name: "Representante 10A", group: Group.where(name: "10A").first)
+Position.create(name: "Representante 10B", group: Group.where(name: "10B").first)
+Candidate.create(name: "Juana de Arco", election: Election.last, picture_url: "", position: Position.where(name: "Personero").first)
+Candidate.create(name: "Partick", election: Election.last, picture_url: "", position: Position.where(name: "Representante 10A").first)
+Candidate.create(name: "Esteban Nano", election: Election.last, picture_url: "", position: Position.where(name: "Representante 10A").first)
+Candidate.create(name: "Juaquin Dorios", election: Election.last, picture_url: "", position: Position.where(name: "Representante 10B").first)
