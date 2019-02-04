@@ -1,0 +1,12 @@
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key != "success" ? "success" : key %>"><%= value %></div>
+<% end %>
+<%= form_for code_path do |f| %>
+    <%= f.number_field :code, placeholder:"Number"%>
+    <%= f.submit 'create', class: 'btn btn-secondary btn-sm', id:"card" %>
+<% end %>
+<%= link_to "Deshabilitar todos los codigos", deleteallcodes_path, method: :delete, data: { confirm: "¿Esta accion pondria todos los codigos en usados?" }%> 
+
+<%@codes.each do |c|%>
+<p><%=c.code%> <%=c.used ? "Usado" : "No Usado" %></p>
+<%end%>
