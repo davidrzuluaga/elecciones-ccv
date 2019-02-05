@@ -8,8 +8,8 @@ class VotersController < ApplicationController
         if @voter != nil
             if @code != nil && !@code.used
                 if !@voter.voted
-                    cookies.permanent.signed[:identification] = @voter.identification
-                    cookies.permanent.signed[:code] = @code.code
+                    cookies.permanent.signed[:identification] = {value: @voter.identification, expires: Time.now + 2.minutes}
+                    cookies.permanent.signed[:code] = {value: @code.code, expires: Time.now + 2.minutes} 
                     redirect_to votar_path
                 else
                     flash[:notice] = 'Usuario ya registra voto'
@@ -24,5 +24,4 @@ class VotersController < ApplicationController
             redirect_to root_path
         end
     end
-
 end

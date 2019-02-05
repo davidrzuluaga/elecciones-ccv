@@ -3,22 +3,26 @@
 <% end %>
 <%if @localpositions != nil %>
     <%@localpositions.each do |position|%>
+        <h3><%=position.name%></h3>
         <% if @votestatus.where(position_id: position.id).count == 0 %>
-            <h3><%=position.name%></h3>
             <%= form_tag controller: :candidate, action: :registevote do %> 
                 <% Candidate.where(position_id: position.id).each do |candidate| %>
                     <%= label_tag(:candidate, candidate.name)%>
                     <%= radio_button_tag(:candidate, candidate.id)%>
                 <% end %> 
                 <%= submit_tag('votar', class: 'btn btn-secondary btn-sm', id:"card") %>
-            <% end %>
+            <% end %> 
+        <%else%>
+            <p>se registro voto por <%=position.name%></p>
         <% end %> 
     <%end%>
+<%else%>
+    <p>no hay candidato local</p>
 <%end%>
 <%if @globalpositions != nil %>
     <%@globalpositions.each do |position|%>
+        <h3><%=position.name%></h3>
         <% if @votestatus.where(position_id: position.id).count == 0 %>
-            <h3><%=position.name%></h3>
             <%= form_tag controller: :candidate, action: :registevote do %> 
                 <% Candidate.where(position_id: position.id).each do |candidate| %>
                    <%= label_tag(:candidate, candidate.name)%>
@@ -26,11 +30,12 @@
                 <% end %> 
                 <%= submit_tag('votar', class: 'btn btn-secondary btn-sm', id:"card") %>
             <% end %> 
+        <%else%>
+            <p>se registro voto por <%=position.name%></p>
         <% end %> 
     <%end%>
+<%else%>
+    <p>no hay candidato global</p>
 <%end%>
-<%if @globalpositions == nil && @localpositions == nil %>
-    <p>Gracias por votar</p>
-    <%= link_to  "Haz clic para Votar", root_path %>
-<%end%>
-<%binding.pry%>
+<p>Gracias por votar</p>
+<%= link_to  "Haz clic para salir", root_path %>
