@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'login/index'
+  get 'admin/index'
   root 'voters#index'
   post '/votante', to: 'voters#checkVoter', as: 'checkVoter'
   get '/votar', to: 'candidate#index', as: 'votar'
