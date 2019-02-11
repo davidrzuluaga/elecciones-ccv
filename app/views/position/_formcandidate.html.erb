@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1><%= form_title %></h1>
+      <%= form_for @candidate do |f| %>
+        <div class="form-group">
+          <%= f.text_field :name, class: "form-control input-lg", placeholder: "Ingresa el nombre del candidato" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :picture_url, class: "form-control input-lg", placeholder: "Ingresa el url de la foto" %>
+        </div>
+        <div class="form-group">
+          <%= f.collection_select(:position_id, Position.all, :id, :name) %> -
+        </div>
+        <div>
+          <%= hidden_field(:election_id, Election.last) %>
+          <%= f.submit form_title, class: "btn btn-primary btn-lg btn-block" %>
+        </div>
+      <% end %>
+        <% if @candidate.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+            <% @candidate.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

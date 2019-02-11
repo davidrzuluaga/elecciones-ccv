@@ -1,2 +1,9 @@
-<h1>Admin#index</h1>
-<p>Find me in app/views/admin/index.html.erb</p>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key != "success" ? "success" : key %>"><%= value %></div>
+<% end %>
+<h1>Administrar Elecciones</h1>
+<h2>Colegio Ciencia y Vida</h2>
+
+<%= link_to  "Gestionar Codigos", codes_path %>
+<%= link_to  "Gestionar Grupos", groups_path %>
+<%= link_to  "Gestionar Candidatos", positionlist_path %>

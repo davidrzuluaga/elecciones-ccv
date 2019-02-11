@@ -1,5 +1,7 @@
 require 'securerandom'
 class CodeController < ApplicationController
+    before_action :adminPermit
+
     def index
         @code = Code.new
         @codes = Code.all

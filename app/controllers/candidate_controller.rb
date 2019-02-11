@@ -1,4 +1,5 @@
 class CandidateController < ApplicationController
+    before_action :votePermit
     def index 
         @votante = Voter.find_by(identification: cookies.signed[:identification])
         @codeused = Code.find_by(code: cookies.signed[:code])
@@ -10,7 +11,7 @@ class CandidateController < ApplicationController
                 Code.find(@codeused.id).update(used: true)
                 Voter.find(@votante.id).update(voted: true)
             else
-                flash[:notice] = 'Ingrese su codigo y contraseña'
+                flash[:notice] = 'Ingrese su identificacion y su codigo'
                 redirect_to root_path
             end
         rescue
@@ -27,4 +28,6 @@ class CandidateController < ApplicationController
         flash[:notice] = 'Voto Registrado, vote por el siguiente'
         redirect_to votar_path
     end
+
+
 end

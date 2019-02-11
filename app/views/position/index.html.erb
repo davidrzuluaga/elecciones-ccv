@@ -1,0 +1,23 @@
+<%= link_to "Crear una posición", positions_path %>  
+<%= link_to "Agregar Candidato", candidates_path %>
+
+ <table>
+  <tr>
+    <th>Posicion</th>
+    <th>Grupo</th>
+    <th>Candidatos</th>
+  <tr>
+  <% @positions.each do |position| %>
+    <tr>
+      <td><%= position.name %> <%= link_to  " mod ", position_url(position) %> - <%= link_to " del ", deleteposition_path(position), method: :delete, data: { confirm: "¿Eliminar?" }%></td>
+      <td><%= position.group.name %></td>
+      <td>
+        <% Candidate.where(position: position.id).each do |candidate| %>
+          <p><%= candidate.name %> <%= link_to  " mod ", candidate_url(candidate) %> - <%= link_to " del ", deletecandidate_path(candidate), method: :delete, data: { confirm: "¿Eliminar?" }%> </p>
+        <%end%>
+      </td>
+    <tr>
+  <% end %>
+</table>
+
+

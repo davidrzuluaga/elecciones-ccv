@@ -1,0 +1,36 @@
+Grupo <%= @group.name %>
+
+<%= link_to  "Modificar nombre", group_path %>
+<%= link_to "Eliminar Grupo", deletegroup_path, method: :delete, data: { confirm: "¿Eliminar?" }%>
+
+<% @positions.each do |position| %></p>
+    <h3><%= position.name %></h3>
+    <table>
+      <tr>
+        <th>Candidato</th>
+        <th>Votos</th>
+      <tr>
+      <% Candidate.where(position: position.id).each do |candidate| %>
+        <tr>
+          <td><%= candidate.name %></td>
+          <td>0</td>
+        <tr>
+      <%end%>
+    </table>
+<%end%>
+
+<% if @voters.count > 0 %>
+    <h3>Estudiantes</h3>
+    <table>
+      <tr>
+        <th>Identificacion</th>
+        <th>Votó</th>
+      <tr>
+      <%@voters.each do |voter|%>
+        <tr>
+          <td><%= voter.identification %></td>
+          <td><%= voter.voted ? "SI" : "NO" %></td>
+        <tr>
+      <%end%>
+    </table>
+<%end%>
