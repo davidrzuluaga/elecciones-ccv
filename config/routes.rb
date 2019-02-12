@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'student/index'
   root 'voters#index'
   
   get '/resultados', to: 'view#index', as: 'view'
@@ -9,6 +10,9 @@ Rails.application.routes.draw do
   
   get '/admin', to: 'admin#index', as: 'admin'
   
+  get '/estudiantes', to: 'student#index', as: 'students'  
+  post '/estudiantes/nuevo(.:format)', to: 'student#create', as: 'createstudent'
+
   get '/candidatos', to: 'position#index', as: 'positionlist'  
   get '/posicion/nuevo', to: 'position#new', as: 'positions'
   post '/posicion/nuevo', to: 'position#create', as: 'createposition'
