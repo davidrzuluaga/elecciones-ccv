@@ -1,5 +1,6 @@
 require 'csv'    
 class StudentController < ApplicationController
+  before_action :adminPermit
   
   def index
   end

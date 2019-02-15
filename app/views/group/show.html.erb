@@ -13,7 +13,7 @@ Grupo <%= @group.name %>
       <% Candidate.where(position: position.id).each do |candidate| %>
         <tr>
           <td><%= candidate.name %></td>
-          <td>0</td>
+          <td><%= Vote.where(candidate: candidate).count %></td>
         <tr>
       <%end%>
     </table>

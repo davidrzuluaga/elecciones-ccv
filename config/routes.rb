@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post '/votante', to: 'voters#checkVoter', as: 'checkVoter'
   get '/votar', to: 'candidate#index', as: 'votar'
   post '/votar', to: 'candidate#registevote', as: 'registevote'  
+  get '/salirdevotar', to: 'candidate#closevotesession', as: 'salirdevotar'  
   
   get '/code', to: 'code#index', as: 'codes'
   post 'code', to: 'code#create' 

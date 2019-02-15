@@ -55,7 +55,9 @@ private
   def viewPermit
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
-      if autenticated.role != "view"
+      if autenticated.role == "admin"
+        flash[:notice] = 'Permiso Organizador'        
+      elsif autenticated.role != "view"
         flash[:notice] = 'No tiene permiso'
         redirect_to login_path
       end  
