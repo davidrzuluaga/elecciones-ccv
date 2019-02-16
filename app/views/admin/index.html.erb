@@ -1,5 +1,5 @@
 <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key != "success" ? "success" : key %>"><%= value %></div>
+    <div class="alert alert-<%=key %>"><%= value %></div>
 <% end %>
 <h1>Administrar Elecciones</h1>
 <h2>Colegio Ciencia y Vida</h2>

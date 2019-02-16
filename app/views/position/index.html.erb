@@ -1,23 +1,28 @@
-<%= link_to "Crear una posición", positions_path %>  
-<%= link_to "Agregar Candidato", candidates_path %>
 
- <table>
-  <tr>
-    <th>Posicion</th>
-    <th>Grupo</th>
-    <th>Candidatos</th>
-  <tr>
-  <% @positions.each do |position| %>
+<table class="table">
+  <thead>
     <tr>
-      <td><%= position.name %> <%= link_to  " mod ", position_url(position) %> - <%= link_to " del ", deleteposition_path(position), method: :delete, data: { confirm: "¿Eliminar?" }%></td>
-      <td><%= position.group.name %></td>
-      <td>
-        <% Candidate.where(position: position.id).each do |candidate| %>
-          <p><%= candidate.name %> <%= link_to  " mod ", candidate_url(candidate) %> - <%= link_to " del ", deletecandidate_path(candidate), method: :delete, data: { confirm: "¿Eliminar?" }%> </p>
-        <%end%>
-      </td>
+      <td scope="row"><%= link_to "Crear una posición", positions_path %></td>
+      <td></td>
+      <td><%= link_to "Agregar Candidato", candidates_path %></td>
+    </tr>
     <tr>
-  <% end %>
+      <th scope="col">Posicion</th>
+      <th scope="col">Grupo</th>
+      <th scope="col">Candidatos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @positions.each do |position| %>
+      <tr>
+        <td scope="row"><%= position.name %> <%= link_to  " mod ", position_url(position) %> - <%= link_to " del ", deleteposition_path(position), method: :delete, data: { confirm: "¿Eliminar?" }%></td>
+        <td><%= position.group.name %></td>
+        <td>
+          <% Candidate.where(position: position.id).each do |candidate| %>
+            <p><%= candidate.name %> <%= link_to  " mod ", candidate_url(candidate) %> - <%= link_to " del ", deletecandidate_path(candidate), method: :delete, data: { confirm: "¿Eliminar?" }%> </p>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-

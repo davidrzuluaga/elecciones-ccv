@@ -12,7 +12,7 @@ class LoginController < ApplicationController
       @current_user = user
       roledirection
     else
-      flash[:notice] = 'Ingrese su usuario y contraseña'
+      flash[:success] = 'Ingrese su usuario y contraseña'
       redirect_to login_path
     end
   end

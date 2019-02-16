@@ -12,11 +12,11 @@ class CandidateController < ApplicationController
                 Voter.find(@votante.id).update(voted: true)
                 Voter.find(@votante.id).update(code_id: @codeused.id)
             else
-                flash[:notice] = 'Ingrese su identificacion y su codigo'
+                flash[:success] = 'Ingrese su identificacion y su codigo'
                 redirect_to root_path
             end
         rescue
-            flash[:notice] = 'Error'
+            flash[:success] = 'Error'
             cookies.delete :identification
             cookies.delete :code
             redirect_to root_path
@@ -26,7 +26,7 @@ class CandidateController < ApplicationController
     def registevote
         @codeused = Code.find_by(code: cookies.signed[:code])
         Vote.create!(candidate_id: params["candidate"].to_i, code: @codeused, position_id: Candidate.find(params["candidate"].to_i).position_id)
-        flash[:notice] = 'Voto Registrado, vote por el siguiente'
+        flash[:success] = 'Voto Registrado, vote por el siguiente'
         redirect_to votar_path
     end
 
@@ -35,6 +35,5 @@ class CandidateController < ApplicationController
         cookies.delete :code
         redirect_to root_path
     end
-
 
 end

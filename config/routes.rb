@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   get '/salirdevotar', to: 'candidate#closevotesession', as: 'salirdevotar'  
   
   get '/code', to: 'code#index', as: 'codes'
+  get '/codestoprint', to: 'code#print', as: 'codestoprint'
   post 'code', to: 'code#create' 
-  delete 'code', to: 'code#destroy', as: 'deleteallcodes'
+  delete '/code', to: 'code#deleteunused', as: 'deleteunusedcodes'
+  delete '/deleteallcodes', to: 'code#destroyall', as: 'deleteallcodes'
+  delete '/deletecode/:id', to: 'code#destroy', as: 'deletecode'
 end

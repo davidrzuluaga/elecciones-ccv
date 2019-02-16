@@ -1,5 +1,6 @@
 class PositionController < ApplicationController
   before_action :adminPermit
+  layout "admin"
 
     def index
         @positions = Position.all.order('name ASC')

@@ -1,15 +1,22 @@
-<h3>Importar</h3>
+<h3>Importar lista de estudiantes</h3>
 <%= form_tag createstudent_path, multipart: true do %>
 <%= file_field_tag :file %>
 <%= submit_tag "Cargar" %>
 <% end %>
-<% flash.each do |key, value| %>
-    <% if key == "success" %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% elsif key == "danger" %>
-        <% value.each do |v| %>
-            <div class="alert alert-danger"><%= v %></div>
+<div class="row">
+    <div class="col-7">
+        <h4>Total estudiantes: <%= @totalstudents %></h4>
+        <h4>Estudiantes que no han votado: <%= @leftstudents %></h4>
+    </div>
+    <div class="col-5">
+        <% flash.each do |key, value| %>
+            <% if key == "success" %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% elsif key == "danger" %>
+                <% value.each do |v| %>
+                    <div class="alert alert-danger"><%= v %></div>
+                <% end %>
+            <% end %>
         <% end %>
-    <% end %>
-<% end %>
-
+    </div>
+</div>

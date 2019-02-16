@@ -1,8 +1,11 @@
 require 'csv'    
 class StudentController < ApplicationController
+  layout "admin"
   before_action :adminPermit
   
   def index
+    @totalstudents = Voter.all.count
+    @leftstudents = Voter.where(voted: false).count
   end
   
   def create
@@ -12,7 +15,7 @@ class StudentController < ApplicationController
     filename = params["file"]
     CSV.foreach(filename.tempfile, headers: true) do |row|
       student = row.to_h
-      newstudent = Voter.new(identification: student["id"].to_i, group: Group.find_by(name: student["grupo"]), voted: false, election: Election.last)
+      newstudent = Voter.new(identification: student["id"].to_i, group: Group.find_by(name: student["grupo"]), voted: false, election: Election.last, code: studentemptycode)
       transactionresult[:procesed] += 1
       if newstudent.save
         transactionresult[:created] += 1

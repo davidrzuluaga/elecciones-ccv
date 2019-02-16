@@ -1,0 +1,24 @@
+@import "bootstrap";
+
+.row {
+  margin-top: 20px;
+}
+p.gestion {
+  font-size: 20px;
+}
+p.code {
+  width: 150px;
+  text-align: center;
+  font-size: 50px;
+  border-style: solid;
+  display: inline-block;
+  border-color: black;
+  border-width: 1px;
+}
+.codelist{
+  p {
+    display: inline-block;
+    padding: 10px;
+    width: 300px;
+  }
+}

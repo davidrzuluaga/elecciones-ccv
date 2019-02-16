@@ -1,5 +1,6 @@
 class GroupController < ApplicationController
   before_action :adminPermit
+  layout "admin"
 
     def index
         @groups = Group.all

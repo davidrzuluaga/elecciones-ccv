@@ -1,14 +1,18 @@
-<table>
-  <tr>
-    <th></th>
-    <th>Nombre</th>
-    <th>Posiciones y Candidatos de este grupo</th>
-    <th>Estudiantes registrados para votar</th>
-    <th>Estudiantes que ya votaron</th>
-  <tr>
+<p class="gestion"><%= link_to "Crear un grupo", newgroup_path %></p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Grupo</th>
+      <th scope="col">Posiciones y Candidatos</th>
+      <th scope="col">Estudiantes registrados para votar</th>
+      <th scope="col">Estudiantes que ya votaron</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @groups.each do |group| %>
     <tr>
-      <td><%= link_to  "entrar", showgroup_url(group) %></td>
+      <td scope="row"><%= link_to  "entrar", showgroup_url(group) %></td>
       <td><%= group.name %></td>
       <td>
         <% Position.where(group: group.id).each do |position| %>
@@ -17,8 +21,8 @@
       </td>
       <td><%= Voter.where(group: group.id).count %></td>
       <td><%= Voter.where(group: group.id, voted: true).count %></td>
-    <tr>
+    </tr>
   <% end %>
+  </tbody>
 </table>
 
-<%= link_to "Crear un grupo", newgroup_path %>

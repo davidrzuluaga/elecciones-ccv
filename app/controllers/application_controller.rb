@@ -9,7 +9,7 @@ private
         roledirection        
       end
     rescue 
-      flash[:notice] = 'Escriba un usuario y una contraseña' 
+      flash[:success] = 'Escriba un usuario y una contraseña' if !autenticated
     end
   end
 
@@ -32,7 +32,7 @@ private
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
       if autenticated.role != "admin"
-        flash[:notice] = 'No tiene permiso'
+        flash[:success] = 'No tiene permiso'
         redirect_to login_path
       end  
     rescue 
@@ -44,7 +44,7 @@ private
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
       if autenticated.role != "vote"
-        flash[:notice] = 'No tiene permiso'
+        flash[:success] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
     rescue 
@@ -56,14 +56,23 @@ private
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
       if autenticated.role == "admin"
-        flash[:notice] = 'Permiso Organizador'        
+        flash[:success] = 'Permiso Organizador'        
       elsif autenticated.role != "view"
-        flash[:notice] = 'No tiene permiso'
+        flash[:success] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
     rescue 
       redirect_to login_path
     end
+  end
+
+  def studentemptycode
+    code = Code.find_by(code: "TEST")
+    if !code
+      Code.create(code: "TEST", used: true)
+      code = Code.find_by(code: "TEST")
+    end
+    code
   end
 
 end
