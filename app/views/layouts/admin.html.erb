@@ -10,11 +10,11 @@
   </head>
 
   <body>
-    <div class="row">
-      <div class="col-2 offset-1">
+    <div class="row admin">
+      <div class="col-2 offset-1" id="rightbar">
         <%= render '/admin/gestionar' %>
       </div>
-      <div class="col-8 ">
+      <div class="col-8" id="content">
         <%= yield %>
       </div>
     </div>

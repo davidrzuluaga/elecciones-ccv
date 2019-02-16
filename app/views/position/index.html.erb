@@ -1,28 +1,30 @@
-
-<table class="table">
-  <thead>
-    <tr>
-      <td scope="row"><%= link_to "Crear una posición", positions_path %></td>
-      <td></td>
-      <td><%= link_to "Agregar Candidato", candidates_path %></td>
-    </tr>
-    <tr>
-      <th scope="col">Posicion</th>
-      <th scope="col">Grupo</th>
-      <th scope="col">Candidatos</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @positions.each do |position| %>
+<div id="tabla">
+  <table class="table">
+    <thead>
       <tr>
-        <td scope="row"><%= position.name %> <%= link_to  " mod ", position_url(position) %> - <%= link_to " del ", deleteposition_path(position), method: :delete, data: { confirm: "¿Eliminar?" }%></td>
-        <td><%= position.group.name %></td>
-        <td>
-          <% Candidate.where(position: position.id).each do |candidate| %>
-            <p><%= candidate.name %> <%= link_to  " mod ", candidate_url(candidate) %> - <%= link_to " del ", deletecandidate_path(candidate), method: :delete, data: { confirm: "¿Eliminar?" }%> </p>
-          <%end%>
-        </td>
+        <td scope="row"><%= link_to "Crear una posición", positions_path, class:"btn btn-success"  %></td>
+        <td></td>
+        <td><%= link_to "Agregar Candidato", candidates_path, class:"btn btn-success"  %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tr>
+        <th scope="col">Posicion</th>
+        <th scope="col">Grupo</th>
+        <th scope="col">Candidatos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @positions.each do |position| %>
+        <tr>
+          <td scope="row"><%= link_to  "Mod.", position_url(position), class: "btn btn-sm btn-primary" %>  <%= link_to "Supr.", deleteposition_path(position), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%> <%= position.name %></td>
+          <td><%= link_to position.group.name, showgroup_path(position.group) %></td>
+          <td>
+            <% Candidate.where(position: position.id).each do |candidate| %>
+              <p><%= link_to  "Mod.", candidate_url(candidate), class: "btn btn-sm btn-primary" %>  <%= link_to "Supr.", deletecandidate_path(candidate), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%>  <%= candidate.name %> </p>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @positions %>
+</div>

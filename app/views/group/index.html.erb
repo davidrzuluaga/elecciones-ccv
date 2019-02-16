@@ -1,5 +1,5 @@
-<p class="gestion"><%= link_to "Crear un grupo", newgroup_path %></p>
-<table class="table">
+<p class="gestion"><%= link_to "Crear un grupo", newgroup_path, class:"btn btn-success" %></p>
+<table class="table" id="tabla">
   <thead>
     <tr>
       <th scope="col"></th>
@@ -12,7 +12,7 @@
   <tbody>
   <% @groups.each do |group| %>
     <tr>
-      <td scope="row"><%= link_to  "entrar", showgroup_url(group) %></td>
+      <td scope="row"><%= link_to "entrar", showgroup_path(group), class: "btn btn-primary btn-sm" %></td>
       <td><%= group.name %></td>
       <td>
         <% Position.where(group: group.id).each do |position| %>

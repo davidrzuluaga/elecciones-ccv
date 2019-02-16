@@ -3,7 +3,7 @@ class PositionController < ApplicationController
   layout "admin"
 
     def index
-        @positions = Position.all.order('name ASC')
+        @positions = Position.order('name desc').paginate :page => params[:page], :per_page => 8
     end
 
     def new

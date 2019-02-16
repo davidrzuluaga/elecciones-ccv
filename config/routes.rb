@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'voters#index'
   
   get '/resultados', to: 'view#index', as: 'view'
+  get '/resultados/:id', to: 'view#show', as: 'viewposition'
 
   get '/login', to: 'login#index', as: 'login'
   post '/login', to: 'login#create'
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   
   get '/estudiantes', to: 'student#index', as: 'students'  
   post '/estudiantes/nuevo(.:format)', to: 'student#create', as: 'createstudent'
+  delete '/estudiantes/del/:id', to: 'student#destroy', as: 'destroystudent'
 
   get '/candidatos', to: 'position#index', as: 'positionlist'  
   get '/posicion/nuevo', to: 'position#new', as: 'positions'

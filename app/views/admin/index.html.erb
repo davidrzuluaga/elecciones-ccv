@@ -1,11 +1,20 @@
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%=key %>"><%= value %></div>
-<% end %>
-<h1>Administrar Elecciones</h1>
-<h2>Colegio Ciencia y Vida</h2>
+<div id="tabla">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%=key %>"><%= value %></div>
+    <% end %>
+    <h1>Colegio Ciencia y Vida</h1>
 
-<%= link_to  "Gestionar Codigos", codes_path %>
-<%= link_to  "Gestionar Grupos", groups_path %>
-<%= link_to  "Gestionar Candidatos", positionlist_path %>
-<%= link_to  "Gestionar Estudiantes", students_path %>
-<%= link_to  "Ver Resultados", view_path %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <h2>Elecciones <%= Time.current.year %></h2>
+      </div>
+      <ul class="list-group list-group-flush">
+        <%= link_to  "1. Gestionar Grupos", groups_path, class:"list-group-item", class:"list-group-item" %>
+        <%= link_to  "2. Gestionar Posiciones", positionlist_path, class:"list-group-item" %>
+        <%= link_to  "3. Gestionar Candidatos", positionlist_path, class:"list-group-item" %>
+        <%= link_to  "4. Gestionar Codigos", codes_path, class:"list-group-item" %>
+        <%= link_to  "5. Gestionar Estudiantes", students_path, class:"list-group-item" %>
+        <%= link_to  "6. Ver Resultados", view_path, class:"list-group-item" %>
+      </ul>
+    </div>
+</div>

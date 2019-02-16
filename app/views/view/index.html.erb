@@ -2,5 +2,35 @@
     <div class="alert alert-<%=key %>"><%= value %></div>
 <% end %>
 <%= link_to 'administrar elecciones', admin_path if @autenticated == "admin"%>
-<h1>View#indexç</h1>
-<p>Find me in app/views/view/indexç.html.erb</p>
+<h1>Resultados Elecciones CyV</h1>
+<div class="row">
+    <% @positions.each do |position| %></p>
+      <div class="col-4">
+        <div class="card text-center">
+          <div class="card-header">
+            <h3><%= position.name %></h3>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Candidato</th>
+                <th scope="col">Votos</th>
+              <tr>
+            </thead>
+            <tbody>
+              <% Candidate.where(position: position.id).each do |candidate| %>
+                <tr>
+                  <td><%= candidate.name %></td>
+                  <td><%= Vote.where(candidate: candidate).count %></td>
+                <tr>
+              <%end%>
+            </tbody>
+          </table>
+          <a class="card" href="<%= viewposition_path(position) %>"><div class="card-footer">
+            Grafica
+          </div></a>
+        </div>
+      </div>
+    <%end%>
+</div>
+<div class="paginate view"><%= will_paginate @positions %></div>

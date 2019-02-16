@@ -6,6 +6,8 @@ class StudentController < ApplicationController
   def index
     @totalstudents = Voter.all.count
     @leftstudents = Voter.where(voted: false).count
+    @students = Voter.all
+    @groups = Group.all
   end
   
   def create
@@ -26,5 +28,13 @@ class StudentController < ApplicationController
     flash[:success] = "se procesaron #{transactionresult[:procesed]} entradas, se crearon #{transactionresult[:created]} estudiantes"
     flash[:danger] = errors
     redirect_to students_path
+  end
+
+  def destroy
+    voter = Voter.find(params[:id])
+    votergroup = Voter.find(params[:id]).group_id
+    flash[:success] = "Se ha eliminado el estudiante #{voter.identification}"
+    voter.destroy
+    redirect_to showgroup_path(votergroup)
   end
 end

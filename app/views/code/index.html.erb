@@ -1,26 +1,29 @@
 <% flash.each do |key, value| %>
     <div class="alert alert-<%=key %>"><%= value %></div>
 <% end %>
-<%= form_for code_path do |f| %>
-    <%= f.number_field :code, placeholder:"Numero de codigos a crear"%>
-    <%= f.submit 'create', class: 'btn btn-secondary btn-sm', id:"card" %>
-<% end %>
 <p>
-  - <%= link_to "imprimir codigos sin usar", codestoprint_path %>
-  - <%= link_to "Eliminar los codigos sin usar", deleteunusedcodes_path, method: :delete, data: { confirm: "¿Esta accion eliminaria los codigos sin usar?" }%> 
-  - <%= link_to "Eliminar todos los codigos", deleteallcodes_path, method: :delete, data: { confirm: "CUIDADO: ¿Esta accion eliminaria TODOS los codigos y sus respectivos votos?" } %>
+  <%= link_to "imprimir codigos sin usar", codestoprint_path, class:"btn btn-success"  %>
+  - <%= link_to "Eliminar los codigos sin usar", deleteunusedcodes_path, class:"btn btn-danger" , method: :delete, data: { confirm: "¿Esta accion eliminaria los codigos sin usar?" }%> 
+  - <%= link_to "Eliminar todos los codigos", deleteallcodes_path, class:"btn btn-danger" , method: :delete, data: { confirm: "CUIDADO: ¿Esta accion eliminaria TODOS los codigos y sus respectivos votos?" } %>
 </p>
-<div class="codelist">
+<div id="tabla">
+    <%= form_for code_path do |f| %>
+        <%= f.number_field :code, placeholder:"Numero de codigos a crear"%>
+        <%= f.submit 'crear', class: 'btn btn-secondary btn-sm', id:"card" %>
+    <% end %>
+</div>
+<div class="codelist" id="tabla">
     <%@codes.each do |c|%>
         <% if c.code != "TEST" %>
-            <p><strong><%=c.code%></strong> <%=c.used ? "Usado por: " : "Sin Usar" %> 
+            <p><%= link_to "Supr", deletecode_path(c), class:"btn btn-secondary btn-sm", method: :delete, data: { confirm: "¿Eliminar el codigo y sus respectivos votos?" } %>
+            <strong><%=c.code%></strong> <%=c.used ? "Usado en: " : "Sin Usar" %> 
             <%= begin 
-                    Voter.find_by(code_id: c.id).identification if c.used 
+                    Group.find(Voter.find_by(code_id: c.id).group_id).name if c.used
                 rescue
                     "deshabilitado."
                 end %>
-                <%= link_to "Eliminar", deletecode_path(c), method: :delete, data: { confirm: "¿Eliminar el codigo y sus respectivos votos?" } %>
             </p>
         <%end%>
     <%end%>
+    <%= will_paginate @codes %>
 </div>

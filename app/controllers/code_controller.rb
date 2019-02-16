@@ -5,7 +5,7 @@ class CodeController < ApplicationController
 
     def index
         @code = Code.new
-        @codes = Code.all
+        @codes = Code.order('created_at DESC').paginate :page => params[:page], :per_page => 10
     end
 
     def create
@@ -33,7 +33,7 @@ class CodeController < ApplicationController
 
     def destroy
         codigo = Code.find(params[:id])
-        flash[:success] = "Se ha eliminado el codigo #{codigo.code} #{"recuerde cambiar el estatus al estudiante #{Voter.find_by(code_id: codigo.id).identification} de grado #{Group.find(Voter.find_by(code_id: codigo.id).group_id).name}"  if codigo.used }"
+        flash[:success] = "Se ha eliminado el codigo #{codigo.code} #{"y sus votos" if codigo.used }"
         codigo.destroy
         redirect_to codes_path
     end
@@ -42,7 +42,7 @@ class CodeController < ApplicationController
         @codestoprint = Code.where(used: false)
     end
 
-    private
+private
 
     def code_params
         params.require(:code).permit(:code)

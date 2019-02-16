@@ -1,14 +1,36 @@
-<h3>Importar lista de estudiantes</h3>
-<%= form_tag createstudent_path, multipart: true do %>
-<%= file_field_tag :file %>
-<%= submit_tag "Cargar" %>
-<% end %>
-<div class="row">
-    <div class="col-7">
-        <h4>Total estudiantes: <%= @totalstudents %></h4>
-        <h4>Estudiantes que no han votado: <%= @leftstudents %></h4>
+
+<div class="row students">
+  <h4 class="total">Total estudiantes: <%= @totalstudents %> - Estudiantes que no han votado: <%= @leftstudents %></h4>
+    <div class="col-6 " id="tabla">
+        <div>
+            <table class="table">
+              <thead>
+                <tr>  
+                  <th></th>
+                  <th>Grupo</th>
+                  <th>Estudiantes registrados</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @groups.each do |g| %>
+                  <tr>
+                    <td><%= link_to "entrar", showgroup_path(g), class: "btn btn-primary btn-sm" %></td>
+                    <td><%= g.name %></td>
+                    <td><%= @students.where(group: g).count%></td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-5">
+    <div class="col-6" id="errors">
+      <h4>Importar lista de estudiantes</h4>
+        <%= form_tag createstudent_path, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= submit_tag "Cargar" %>
+        <% end %>
+        <br>
+        <h4>Estatus</h4>
         <% flash.each do |key, value| %>
             <% if key == "success" %>
                 <div class="alert alert-<%= key %>"><%= value %></div>

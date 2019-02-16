@@ -1,36 +1,55 @@
-Grupo <%= @group.name %>
-
-<%= link_to  "Modificar nombre", group_path %>
-<%= link_to "Eliminar Grupo", deletegroup_path, method: :delete, data: { confirm: "¿Eliminar?" }%>
-
-<% @positions.each do |position| %></p>
-    <h3><%= position.name %></h3>
-    <table>
-      <tr>
-        <th>Candidato</th>
-        <th>Votos</th>
-      <tr>
-      <% Candidate.where(position: position.id).each do |candidate| %>
-        <tr>
-          <td><%= candidate.name %></td>
-          <td><%= Vote.where(candidate: candidate).count %></td>
-        <tr>
+<h1>Grupo <%= @group.name %></h1>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%=key %>"><%= value %></div>
+<% end %>
+<%= link_to  "Modificar nombre", group_path, class: "btn btn-primary" %>
+<%= link_to "Eliminar Grupo", deletegroup_path, class: "btn btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%>
+<div class="row">
+  <div class="col-5" id="tabla">
+    <% @positions.each do |position| %></p>
+      <h3><%= position.name %></h3>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">Candidato</th>
+            <th scope="col">Votos</th>
+          <tr>
+        </thead>
+        <tbody>
+          <% Candidate.where(position: position.id).each do |candidate| %>
+            <tr>
+              <td><%= candidate.name %></td>
+              <td><%= Vote.where(candidate: candidate).count %></td>
+            <tr>
+          <%end%>
+        </tbody>
+      </table>
       <%end%>
-    </table>
-<%end%>
+    </div>
+    <% if @voters.count > 0 %>
+      <div class="col-6" id="tabla">
+        <h3>Estudiantes</h3>
+        <table class="table">
+          <thead>
+            <tr>  
+              <th scope="col"></th>
+              <th>Identificacion</th>
+              <th>Votó</th>
+              <th>Votos marcados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%@voters.each do |voter|%>
+              <tr>
+                <td><%= link_to "Supr", destroystudent_path(voter), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "¿Eliminar al estudiante y sus votos?" } %></td>
+                <td><%= voter.identification %></td>
+                <td><%= voter.voted ? "SI" : "NO" %></td>
+                <td><%= Vote.where(code_id: voter.code).count %></td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+    </div>
+  <%end%>
+</div>
 
-<% if @voters.count > 0 %>
-    <h3>Estudiantes</h3>
-    <table>
-      <tr>
-        <th>Identificacion</th>
-        <th>Votó</th>
-      <tr>
-      <%@voters.each do |voter|%>
-        <tr>
-          <td><%= voter.identification %></td>
-          <td><%= voter.voted ? "SI" : "NO" %></td>
-        <tr>
-      <%end%>
-    </table>
-<%end%>

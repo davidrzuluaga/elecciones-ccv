@@ -1,4 +1,4 @@
-<p><%= link_to "Imprimir", "javascript:print()".html_safe %> - <%= link_to "atras", admin_path %></p>
+<p><%= link_to "Imprimir", "javascript:print()".html_safe, class: 'btn btn-primary' %> - <%= link_to "atras", admin_path, class: 'btn btn-secondary' %></p>
 <% @codestoprint.each do |code| %>
     <p class="code"><%= code.code %></p>
 <% end %>
