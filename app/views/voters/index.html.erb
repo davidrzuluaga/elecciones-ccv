@@ -1,10 +1,19 @@
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%=key %>"><%= value %></div>
-<% end %>
-<%= form_tag controller: :voters, action: :checkVoter do %>
-    <%= label_tag(:identification, "Identificacion")%>
-    <%= number_field_tag(:identification)%>
-    <%= label_tag(:code, "codigo")%>    
-    <%= text_field_tag(:code) %>
-    <%= submit_tag('Iniciar', class: 'btn btn-secondary btn-sm', id:"card") %>
-<% end %>
+<div class="row">
+    <div class="col-3"><img src="https://scontent.feoh5-1.fna.fbcdn.net/v/t1.0-9/11041229_949291578437997_3213553570183019463_n.jpg?_nc_cat=101&_nc_ht=scontent.feoh5-1.fna&oh=56cb72f1b689a95cf709ccb5f2df0709&oe=5D26886D" width="100px" heigth="100px"></div>
+    <div class="col-7 titles">
+        <h1>Jornada de Votación</h1>
+        <h2> Colegio Ciencia y Vida</h2>
+    </div>
+</div>
+<div class="log" id="tabla">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%=key %>"><%= value %></div>
+    <% end %>
+    <%= form_tag controller: :voters, action: :checkVoter do %>
+        <%= label_tag(:identification, "Identificacion")%>
+        <%= number_field_tag(:identification)%>
+        <%= label_tag(:code, "codigo")%>    
+        <%= text_field_tag(:code) %>
+        <%= submit_tag('Iniciar', class: 'btn btn-secondary btn-sm', id:"card") %>
+    <% end %>
+</div>

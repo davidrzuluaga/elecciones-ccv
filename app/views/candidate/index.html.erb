@@ -1,41 +1,69 @@
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%=key %>"><%= value %></div>
-<% end %>
-<%if @localpositions != nil %>
-    <%@localpositions.each do |position|%>
-        <h3><%=position.name%></h3>
-        <% if @votestatus.where(position_id: position.id).count == 0 %>
-            <%= form_tag controller: :candidate, action: :registevote do %> 
-                <% Candidate.where(position_id: position.id).each do |candidate| %>
-                    <%= label_tag(:candidate, candidate.name)%>
-                    <%= radio_button_tag(:candidate, candidate.id)%>
-                <% end %> 
-                <%= submit_tag('votar', class: 'btn btn-secondary btn-sm', id:"card") %>
-            <% end %> 
-        <%else%>
-            <p>se registro voto por <%=position.name%></p>
-        <% end %> 
+<%= link_to  "Haz clic para salir", salirdevotar_path, class:"btn btn-warning" %>
+<div class="row">
+    <div class="col-3"><img src="https://scontent.feoh5-1.fna.fbcdn.net/v/t1.0-9/11041229_949291578437997_3213553570183019463_n.jpg?_nc_cat=101&_nc_ht=scontent.feoh5-1.fna&oh=56cb72f1b689a95cf709ccb5f2df0709&oe=5D26886D" width="100px" heigth="100px"></div>
+    <div class="col-7 titles">
+        <h1>Jornada de Votación</h1>
+        <h2> Colegio Ciencia y Vida</h2>
+    </div>
+</div>
+<div class="flash">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%=key %>"><%= value %></div>
+    <% end %>
+</div>
+<div class="row" id="votercards">
+    <%if @globalpositions != nil %>
+        <%@globalpositions.each do |position|%>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <%=position.name%>
+                    </div>
+                    <% if @votestatus.where(position_id: position.id).count == 0 %>
+                        <%= form_tag controller: :candidate, action: :registevote do %> 
+                            <% Candidate.where(position_id: position.id).each do |candidate| %>
+                                <p class="cardcontent">
+                                    <%= radio_button_tag(:candidate, candidate.id)%>
+                                    <img src="<%= candidate.picture_url%>" width="100px" heigth="100px">
+                                    <%= label_tag(:candidate, candidate.name)%>
+                                </p>
+                            <% end %> 
+                            <%= submit_tag("votar por #{position.name}", class: 'btn btn-secondary btn-block', id:"card") %>
+                        <% end %> 
+                    <%else%>
+                        <div class="alert alert-success">se registró voto por <%=position.name%></div>
+                    <% end %> 
+                </div>
+            </div>
+        <%end%>
+    <%else%>
+        <p>no hay candidato global</p>
     <%end%>
-<%else%>
-    <p>no hay candidato local</p>
-<%end%>
-<%if @globalpositions != nil %>
-    <%@globalpositions.each do |position|%>
-        <h3><%=position.name%></h3>
-        <% if @votestatus.where(position_id: position.id).count == 0 %>
-            <%= form_tag controller: :candidate, action: :registevote do %> 
-                <% Candidate.where(position_id: position.id).each do |candidate| %>
-                   <%= label_tag(:candidate, candidate.name)%>
-                   <%= radio_button_tag(:candidate, candidate.id)%>
-                <% end %> 
-                <%= submit_tag('votar', class: 'btn btn-secondary btn-sm', id:"card") %>
-            <% end %> 
-        <%else%>
-            <p>se registro voto por <%=position.name%></p>
-        <% end %> 
+    <%if @localpositions != nil %>
+        <%@localpositions.each do |position|%>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <%=position.name%>
+                    </div>
+                    <% if @votestatus.where(position_id: position.id).count == 0 %>
+                        <%= form_tag controller: :candidate, action: :registevote do %> 
+                            <% Candidate.where(position_id: position.id).each do |candidate| %>
+                               <p class="cardcontent">
+                                    <%= radio_button_tag(:candidate, candidate.id)%>
+                                    <img src="<%= candidate.picture_url%>" width="100px" heigth="100px">
+                                    <%= label_tag(:candidate, candidate.name)%>
+                                </p>
+                            <% end %> 
+                            <%= submit_tag("votar por #{position.name}", class: 'btn btn-secondary btn-block', id:"card") %>
+                        <% end %> 
+                    <%else%>
+                        <div class="alert alert-success">se registró voto por <%=position.name%></div>
+                    <% end %> 
+                </div>
+            </div>
+        <%end%>
+    <%else%>
+        <p>no hay candidato local</p>
     <%end%>
-<%else%>
-    <p>no hay candidato global</p>
-<%end%>
-<p>Gracias por votar</p>
-<%= link_to  "Haz clic para salir", salirdevotar_path %>
+</div>

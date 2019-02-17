@@ -14,15 +14,15 @@ class VotersController < ApplicationController
                     cookies.permanent.signed[:code] = {value: @code.code, expires: Time.now + 5.minutes} 
                     redirect_to votar_path
                 else
-                    flash[:success] = 'Usuario ya registra voto'
+                    flash[:warning] = 'Usuario ya registra voto'
                     redirect_to root_path                
                 end
             else
-                flash[:success] = 'Codigo invalido'
+                flash[:danger] = 'Codigo invalido'
                 redirect_to root_path
             end
         else
-            flash[:success] = 'Usuario no encontrado o no habilitado para votar'
+            flash[:danger] = 'Usuario no encontrado o no habilitado para votar'
             redirect_to root_path
         end
     end

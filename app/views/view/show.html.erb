@@ -1,4 +1,4 @@
-<div id="expenses-chart" style="height: 300px;">
-  <%= pie_chart @chart %>
+<div id="chart" style="height: 300px;">
+<h2>Grafica de <%= @position.name%></h2>
+  <%= pie_chart @chart, refresh: 60 %>
 </div>
-  <%=  @chart %>

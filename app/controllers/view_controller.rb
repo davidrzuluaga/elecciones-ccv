@@ -1,4 +1,3 @@
-require 'json'
 class ViewController < ApplicationController
   before_action :viewPermit
 
@@ -11,12 +10,12 @@ class ViewController < ApplicationController
 
   def show
     candidates = {}
-    @candidates = {}
     Vote.where(candidate: Candidate.where(position: Position.find(params[:id]))).each { |vote| candidates[Candidate.find(vote.candidate_id).name] = 0 }
     Vote.where(candidate: Candidate.where(position: Position.find(params[:id]))).each do |vote|
       candidates[Candidate.find(vote.candidate_id).name] = candidates[ Candidate.find(vote.candidate_id).name] += 1
     end
-    @chart = [@candidates[Position.find(params[:id]).name] = candidates]
-    @chart.to_json
+    @chart = candidates
+    @position = Position.find(params[:id])
+    @chart
   end
 end

@@ -2,16 +2,14 @@
 <html>
   <head>
     <title>EleccionesCcv</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= render 'layouts/head'%>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="row admin">
-      <div class="col-2 offset-1" id="rightbar">
+      <div class="offset-1"></div>
+      <div class="col-2" id="rightbar">
         <%= render '/admin/gestionar' %>
       </div>
       <div class="col-8" id="content">

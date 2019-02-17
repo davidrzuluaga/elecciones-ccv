@@ -40,7 +40,9 @@ p.code {
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 1px #000000;
-
+}
+.log#tabla {
+  margin-top: 40px;
 }
 #tablaouter {
   background: rgb(255, 255, 255);
@@ -66,9 +68,36 @@ p.code {
 a.card{
   text-decoration: none;
 }
+#chart h2 {
+  text-align: center;
+}
 .paginate.view {
   margin-top: 30px;
 } 
+input[type='radio'] { transform: scale(4); }
+.titles {
+  display: inline-block;
+  text-align: center;
+}
+.logo {
+  margin: 20px;
+}
+.flash {
+  margin-top: 15px;
+}
+#votercards {
+  .card {
+    margin-top: 10px;
+    .cardcontent {
+      padding-left: 40px;
+      padding-top: 20px;
+    }
+    .card-header {
+      text-align: center;
+      font-size: 20px;
+    }
+  }
+}
 .pagination {
   background: white;
   cursor: default;

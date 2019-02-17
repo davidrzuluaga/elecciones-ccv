@@ -29,15 +29,18 @@
           <%= file_field_tag :file %>
           <%= submit_tag "Cargar" %>
         <% end %>
+        <a href="estudiantes.csv">archivo sample</a>
         <br>
         <h4>Estatus</h4>
         <% flash.each do |key, value| %>
             <% if key == "success" %>
-                <div class="alert alert-<%= key %>"><%= value %></div>
+                <div class="alert alert-success"><%= value %></div>
             <% elsif key == "danger" %>
                 <% value.each do |v| %>
                     <div class="alert alert-danger"><%= v %></div>
                 <% end %>
+            <% else %>
+              <div class="alert alert-<%= key %>"><%= value %></div>
             <% end %>
         <% end %>
     </div>
