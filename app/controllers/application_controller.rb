@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
 def checkip
   code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
   if code
-    # if code.log != request.remote_ip
-    #   code.destroy
-    #   cookies.delete :session
-    #   flash[:warning] = 'Escriba un usuario y una contraseña'
-    #   redirect_to login_path
-    # end
+    if code.log != request.remote_ip
+      code.destroy
+      cookies.delete :session
+      flash[:warning] = 'Escriba un usuario y una contraseña'
+      redirect_to login_path
+    end
   else
     cookies.delete :session
     flash[:warning] = 'Escriba un usuario y una contraseña'
@@ -36,7 +36,6 @@ private
     begin
       code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
       autenticated = User.find(code.user_id)
-      checkip
       if autenticated.role == "admin"
         redirect_to admin_path
       elsif autenticated.role == "vote"
