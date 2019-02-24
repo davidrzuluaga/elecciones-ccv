@@ -9,7 +9,7 @@ def checkip
       p code.log
       p request.remote_ip
       flash[:warning] = 'IP no coincide'
-      redirect_to login_path
+      redirect_to root_path
     end
   else
     cookies.delete :session
