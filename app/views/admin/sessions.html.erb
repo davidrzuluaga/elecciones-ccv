@@ -16,7 +16,7 @@
     <tr>
       <td><%= link_to "Cerrar sesión", deletesession_path(sesion.id), class:"btn btn-danger" , method: :delete, data: { confirm: "¿Desea cerrar esta sesión?" } %></td>
       <td><%= user_by_id(sesion.user_id).user %></td>
-      <td><%= sesion.created_at %> </td>
+      <td><%= sesion.created_at.strftime("%b %d a las %I:%M %p") %> </td>
       <td><%= sesion.log %></td>
     </tr>
   <% end %>

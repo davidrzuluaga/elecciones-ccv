@@ -19,6 +19,7 @@ class LoginController < ApplicationController
   end
 
   def destroy
+    Auth.find_by(sessioncode: cookies.signed[:session]["code"]).destroy
     cookies.delete :session
     redirect_to login_path
   end
