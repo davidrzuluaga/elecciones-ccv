@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 def checkip
   code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
   if code
-    if code.log != request.remote_ip
+    if code.log != request.ip
       # code.destroy
       # cookies.delete :session
       p code.log
