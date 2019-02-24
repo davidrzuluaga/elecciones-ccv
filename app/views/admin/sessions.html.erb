@@ -1,0 +1,24 @@
+<table class="table" id="tabla">
+    <h2>Sesiones iniciadas</h2>
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%=key %>"><%= value %></div>
+    <% end %>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Dirección IP</th>
+    </tr>
+  </thead>
+  <tbody>
+   <%@sesiones.each do |sesion| %>
+    <tr>
+      <td><%= link_to "Cerrar sesión", deletesession_path(sesion.id), class:"btn btn-danger" , method: :delete, data: { confirm: "¿Desea cerrar esta sesión?" } %></td>
+      <td><%= user_by_id(sesion.user_id).user %></td>
+      <td><%= sesion.created_at %> </td>
+      <td><%= sesion.log %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

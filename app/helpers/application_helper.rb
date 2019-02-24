@@ -17,5 +17,7 @@ module ApplicationHelper
     def group_of_a_code(code_id)
         Group.find(Voter.find_by(code_id: code_id).group_id)
     end
-
+    def user_by_id(id)
+        User.find(id)
+    end
 end

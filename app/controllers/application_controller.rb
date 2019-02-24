@@ -1,21 +1,42 @@
 class ApplicationController < ActionController::Base
 
+def checkip
+  code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+  if code
+    if code.log != request.remote_ip
+      code.destroy
+      cookies.delete :session
+      flash[:warning] = 'Escriba un usuario y una contraseña'
+      redirect_to login_path
+    end
+  else
+    cookies.delete :session
+    flash[:warning] = 'Escriba un usuario y una contraseña'
+    redirect_to login_path
+  end
+end
+
 private
 
   def alreadyautenticated
     begin
-      autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+      code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+      autenticated = User.find(code.user_id)
+      checkip
       if autenticated
-        roledirection        
+        roledirection
       end
     rescue 
-      flash[:success] = 'Escriba un usuario y una contraseña' if !autenticated
+      cookies.delete :session
+      flash[:warning] = 'Escriba un usuario y una contraseña' if !autenticated
     end
   end
 
   def roledirection
     begin
-      autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+      code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+      autenticated = User.find(code.user_id)
+      checkip
       if autenticated.role == "admin"
         redirect_to admin_path
       elsif autenticated.role == "vote"
@@ -24,37 +45,46 @@ private
         redirect_to view_path
       end
     rescue 
+      cookies.delete :session
       redirect_to login_path
     end
   end
 
   def adminPermit
     begin
-      autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+      code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+      autenticated = User.find(code.user_id)
+      checkip
       if autenticated.role != "admin"
         flash[:danger] = 'No tiene permiso'
         redirect_to login_path
       end  
     rescue 
+      cookies.delete :session      
       redirect_to login_path
     end
   end
 
   def votePermit
     begin
-      autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+      code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+      autenticated = User.find(code.user_id)
+      checkip
       if autenticated.role != "vote"
         flash[:danger] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
     rescue 
+      cookies.delete :session
       redirect_to login_path
     end
   end
 
   def viewPermit
     begin
-      autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+      code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+      autenticated = User.find(code.user_id)
+      checkip
       if autenticated.role == "admin"
         flash[:success] = 'Permiso Organizador'        
       elsif autenticated.role != "view"
@@ -62,6 +92,7 @@ private
         redirect_to login_path
       end  
     rescue 
+      cookies.delete :session
       redirect_to login_path
     end
   end

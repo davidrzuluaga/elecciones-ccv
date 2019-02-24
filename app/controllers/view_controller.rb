@@ -2,7 +2,8 @@ class ViewController < ApplicationController
   before_action :viewPermit
 
   def index
-    autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
+    code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
+    autenticated = User.find(code.user_id)
     @autenticated = autenticated.role if autenticated  
     @positions = Position.order('name asc')#.paginate :page => params[:page], :per_page => 3
   end

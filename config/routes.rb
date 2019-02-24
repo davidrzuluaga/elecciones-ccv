@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/claves/:id', to: 'admin#claves', as: 'claves'
   post '/claves/:id', to: 'admin#cambiarclave', as: 'cambiarclave'
   get '/voterslogout', to: 'admin#voterslogout', as: 'voterslogout'
+  get '/sesiones', to: 'admin#sessions', as: 'sessions'
+  delete '/sesiones/:id', to: 'admin#delete_session', as: 'deletesession'
 
   get '/estudiantes', to: 'student#index', as: 'students'  
   post '/estudiantes/nuevo(.:format)', to: 'student#create', as: 'createstudent'

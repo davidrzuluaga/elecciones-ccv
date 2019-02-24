@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  sessioncode: MyString
+  log: MyString
+
+two:
+  user: two
+  sessioncode: MyString
+  log: MyString
