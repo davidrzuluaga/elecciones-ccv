@@ -1,4 +1,36 @@
-<div id="chart" style="height: 300px;">
-<h2>Grafica de <%= @position.name%></h2>
-  <%= pie_chart @chart, refresh: 60 %>
+<p><%= link_to 'administrar elecciones', admin_path if @autenticated == "admin"%></p>
+<%= link_to 'Volver', view_path %>
+<h2>Resultado de Elecciones por <%= @position.name%></h2>
+<div class="row" id="result">
+  <div class="col-7">
+    <table class="table" id="tabla">
+      <thead>
+        <tr>
+          <th scope="col">Candidato</th>
+          <th scope="col">Votos</th>
+        <tr>
+      </thead>
+      <tbody>
+        <% candidates_per_position(@position.id).each do |candidate| %>
+          <tr>
+            <td><%= candidate.name %></td>
+            <td><%= votes_per_candidate(candidate).count %></td>
+          <tr>
+        <%end%>
+      </tbody>
+    </table>
+    <div id="chart" style="height: 300px;">
+      <%= pie_chart @chart, refresh: 60 %>
+    </div>
+  </div>
+  <div class="col-5">
+     <div id="chart">
+      <h4>Votos por hora del dia</h4>
+      <%= bar_chart @votesbyhour %>
+    </div>
+    <div id="chart">
+      <h4>Votos por dia del mes</h4>
+      <%= bar_chart @votesbyday %>
+    </div>
+  </div>
 </div>

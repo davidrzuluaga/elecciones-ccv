@@ -16,5 +16,5 @@ Candidate.create(name: "Esteban Nano", election: Election.last, picture_url: "pi
 Candidate.create(name: "Juaquin Dorios", election: Election.last, picture_url: "picture", position: Position.where(name: "Representante 10B").first)
 Candidate.create(name: "Contra Prohibir", election: Election.last, picture_url: "picture", position: Position.where(name: "Contralor").first)
 User.create(user: "organizador", password: "admin", role: "admin", logincode: SecureRandom.hex(10))
-User.create(user: "voter", password: "voter", role: "vote", logincode: SecureRandom.hex(10))
+User.create(user: "votante", password: "voter", role: "vote", logincode: SecureRandom.hex(10))
 User.create(user: "observador", password: "viewer", role: "view", logincode: SecureRandom.hex(10))

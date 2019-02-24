@@ -32,7 +32,7 @@ private
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
       if autenticated.role != "admin"
-        flash[:success] = 'No tiene permiso'
+        flash[:danger] = 'No tiene permiso'
         redirect_to login_path
       end  
     rescue 
@@ -44,7 +44,7 @@ private
     begin
       autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
       if autenticated.role != "vote"
-        flash[:success] = 'No tiene permiso' if !autenticated
+        flash[:danger] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
     rescue 
@@ -58,7 +58,7 @@ private
       if autenticated.role == "admin"
         flash[:success] = 'Permiso Organizador'        
       elsif autenticated.role != "view"
-        flash[:success] = 'No tiene permiso' if !autenticated
+        flash[:danger] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
     rescue 

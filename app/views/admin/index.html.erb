@@ -1,20 +1,37 @@
 <div id="tabla">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%=key %>"><%= value %></div>
-    <% end %>
-    <h1>Colegio Ciencia y Vida</h1>
-
-    <div class="card" style="width: 18rem;">
-      <div class="card-header">
-        <h2>Elecciones <%= Time.current.year %></h2>
+  <h1>Colegio Ciencia y Vida</h1>
+  <h2>Elecciones <%= Time.current.year %></h2>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%=key %>"><%= value %></div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <h3>Organizar</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <%= link_to  "1. Gestionar Grupos", groups_path, class:"list-group-item", class:"list-group-item" %>
+          <%= link_to  "2. Gestionar Posiciones", positionlist_path, class:"list-group-item" %>
+          <%= link_to  "3. Gestionar Candidatos", positionlist_path, class:"list-group-item" %>
+          <%= link_to  "4. Gestionar Codigos", codes_path, class:"list-group-item" %>
+          <%= link_to  "5. Gestionar Estudiantes", students_path, class:"list-group-item" %>
+          <%= link_to  "6. Ver Resultados", view_path, class:"list-group-item" %>
+        </ul>
       </div>
-      <ul class="list-group list-group-flush">
-        <%= link_to  "1. Gestionar Grupos", groups_path, class:"list-group-item", class:"list-group-item" %>
-        <%= link_to  "2. Gestionar Posiciones", positionlist_path, class:"list-group-item" %>
-        <%= link_to  "3. Gestionar Candidatos", positionlist_path, class:"list-group-item" %>
-        <%= link_to  "4. Gestionar Codigos", codes_path, class:"list-group-item" %>
-        <%= link_to  "5. Gestionar Estudiantes", students_path, class:"list-group-item" %>
-        <%= link_to  "6. Ver Resultados", view_path, class:"list-group-item" %>
-      </ul>
     </div>
+    <div class="col-md-5">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <h3>Administrar</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+          <%= link_to  "Cerrar sesiones de votación", voterslogout_path, class:"list-group-item"%>
+          <%= link_to  "Contraseña de Organizador", claves_path(1), class:"list-group-item"%>
+          <%= link_to  "Contraseña de Observador", claves_path(2), class:"list-group-item"%>
+          <%= link_to  "Contraseña para Votacion", claves_path(3), class:"list-group-item"%>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

@@ -48,7 +48,7 @@
                     </div>
                     <% if @votestatus.where(position_id: position.id).count == 0 %>
                         <%= form_tag controller: :candidate, action: :registevote do %> 
-                            <% Candidate.where(position_id: position.id).each do |candidate| %>
+                            <% candidates_per_position(position.id).each do |candidate| %>
                                <p class="cardcontent">
                                     <%= radio_button_tag(:candidate, candidate.id)%>
                                     <img src="<%= candidate.picture_url%>" width="100px" heigth="100px">

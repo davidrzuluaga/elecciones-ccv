@@ -15,12 +15,12 @@
       <td scope="row"><%= link_to "entrar", showgroup_path(group), class: "btn btn-primary btn-sm" %></td>
       <td><%= group.name %></td>
       <td>
-        <% Position.where(group: group.id).each do |position| %>
-            <p><%= position.name %>: <%= Candidate.where(position: position.id).count %></p>
+        <% position_by_group(group.id).each do |position| %>
+            <p><%= position.name %>: <%= candidates_per_position(position.id).count %></p>
         <%end%>
       </td>
-      <td><%= Voter.where(group: group.id).count %></td>
-      <td><%= Voter.where(group: group.id, voted: true).count %></td>
+      <td><%= voters_by_group(group.id).count %></td>
+      <td><%= voters_by_group(group.id).where(voted: true).count %></td>
     </tr>
   <% end %>
   </tbody>

@@ -16,7 +16,7 @@
                   <tr>
                     <td><%= link_to "entrar", showgroup_path(g), class: "btn btn-primary btn-sm" %></td>
                     <td><%= g.name %></td>
-                    <td><%= @students.where(group: g).count%></td>
+                    <td><%= voters_by_group(g.id).count%></td>
                   </tr>
                 <%end%>
               </tbody>

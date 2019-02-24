@@ -18,7 +18,7 @@
           <td scope="row"><%= link_to  "Mod.", position_url(position), class: "btn btn-sm btn-primary" %>  <%= link_to "Supr.", deleteposition_path(position), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%> <%= position.name %></td>
           <td><%= link_to position.group.name, showgroup_path(position.group) %></td>
           <td>
-            <% Candidate.where(position: position.id).each do |candidate| %>
+            <% candidates_per_position(position.id).each do |candidate| %>
               <p><%= link_to  "Mod.", candidate_url(candidate), class: "btn btn-sm btn-primary" %>  <%= link_to "Supr.", deletecandidate_path(candidate), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%>  <%= candidate.name %> </p>
             <%end%>
           </td>

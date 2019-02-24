@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get '/logout', to: 'login#destroy', as: 'logout'
   
   get '/admin', to: 'admin#index', as: 'admin'
-  
+  get '/claves/:id', to: 'admin#claves', as: 'claves'
+  post '/claves/:id', to: 'admin#cambiarclave', as: 'cambiarclave'
+  get '/voterslogout', to: 'admin#voterslogout', as: 'voterslogout'
+
   get '/estudiantes', to: 'student#index', as: 'students'  
   post '/estudiantes/nuevo(.:format)', to: 'student#create', as: 'createstudent'
   delete '/estudiantes/del/:id', to: 'student#destroy', as: 'destroystudent'

@@ -4,4 +4,5 @@ class Voter < ApplicationRecord
   belongs_to :group
   belongs_to :code
   validates :group_id, :identification, presence: true
+
 end

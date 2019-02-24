@@ -16,10 +16,10 @@
           <tr>
         </thead>
         <tbody>
-          <% Candidate.where(position: position.id).each do |candidate| %>
+          <% candidates_per_position(position.id).each do |candidate| %>
             <tr>
               <td><%= candidate.name %></td>
-              <td><%= Vote.where(candidate: candidate).count %></td>
+              <td><%= votes_per_candidate(candidate).count %></td>
             <tr>
           <%end%>
         </tbody>

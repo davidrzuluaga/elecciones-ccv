@@ -3,5 +3,4 @@ class Position < ApplicationRecord
   has_many :candidates, dependent: :destroy
   has_many :votes, dependent: :destroy
   validates :name, :group_id, presence: true
-
 end

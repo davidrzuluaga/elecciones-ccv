@@ -3,5 +3,4 @@ class Group < ApplicationRecord
   has_many :positions, dependent: :destroy
   has_many :voters, dependent: :destroy
   validates :name, presence: true
-
 end

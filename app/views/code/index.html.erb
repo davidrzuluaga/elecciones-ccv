@@ -13,12 +13,12 @@
     <% end %>
 </div>
 <div class="codelist" id="tabla">
-    <%@codes.each do |c|%>
-        <% if c.code != "TEST" %>
-            <p><%= link_to "Supr", deletecode_path(c), class:"btn btn-secondary btn-sm", method: :delete, data: { confirm: "¿Eliminar el codigo y sus respectivos votos?" } %>
-            <strong><%=c.code%></strong> <%=c.used ? "Usado en: " : "Sin Usar" %> 
+    <%@codes.each do |code|%>
+        <% if code.code != "TEST" %>
+            <p><%= link_to "Supr", deletecode_path(code), class:"btn btn-secondary btn-sm", method: :delete, data: { confirm: "¿Eliminar el codigo y sus respectivos votos?" } %>
+            <strong><%=code.code%></strong> <%=code.used ? "Usado en: " : "Sin Usar" %> 
             <%= begin 
-                    Group.find(Voter.find_by(code_id: c.id).group_id).name if c.used
+                    group_of_a_code(code.id).name if code.used
                 rescue
                     "deshabilitado."
                 end %>

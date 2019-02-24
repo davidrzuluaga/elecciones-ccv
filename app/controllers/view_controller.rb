@@ -4,18 +4,22 @@ class ViewController < ApplicationController
   def index
     autenticated = User.find_by(logincode: cookies.signed[:session]["code"])
     @autenticated = autenticated.role if autenticated  
-    @group = Group.all
-    @positions = Position.order('name asc').paginate :page => params[:page], :per_page => 3
+    @positions = Position.order('name asc')#.paginate :page => params[:page], :per_page => 3
   end
-
+  
   def show
     candidates = {}
-    Vote.where(candidate: Candidate.where(position: Position.find(params[:id]))).each { |vote| candidates[Candidate.find(vote.candidate_id).name] = 0 }
-    Vote.where(candidate: Candidate.where(position: Position.find(params[:id]))).each do |vote|
+    @votesbyhour = {}
+    @votesbyday = {}
+    @position = Position.find(params[:id])
+    Vote.where(candidate: Candidate.where(position: @position.id)).each { |vote| candidates[Candidate.find(vote.candidate_id).name] = 0 }
+    Vote.where(candidate: Candidate.where(position: @position.id)).each do |vote|
       candidates[Candidate.find(vote.candidate_id).name] = candidates[ Candidate.find(vote.candidate_id).name] += 1
     end
+    votesbyhour = Vote.where(candidate: Candidate.where(position: @position.id)).group_by_hour_of_day(:created_at).count
+    votesbyhour.each {|v, i| @votesbyhour[v] = i if i != 0}
+    votesbyday = Vote.where(candidate: Candidate.where(position: @position.id)).group_by_day_of_month(:created_at).count
+    votesbyday.each {|v, i| @votesbyday[v] = i if i != 0} 
     @chart = candidates
-    @position = Position.find(params[:id])
-    @chart
   end
 end
