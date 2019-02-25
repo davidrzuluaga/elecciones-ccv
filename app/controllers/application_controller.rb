@@ -18,9 +18,9 @@ def checkip
       #redirect_to root_path
     end
   else
-    cookies.delete :session
+    # cookies.delete :session
     flash[:warning] = 'Escriba un usuario y una contraseña (#6)'
-    redirect_to login_path
+    # redirect_to login_path
   end
 end
 
