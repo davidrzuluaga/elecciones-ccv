@@ -42,8 +42,8 @@ private
   end
 
   def roledirection
-    cookie = cookies.signed[:session]
-    if cookie
+    begin
+      cookie = cookies.signed[:session]
       code = Auth.find_by(sessioncode: cookie["code"])
       autenticated = User.find(code.user_id)
       if autenticated.role == "admin"
@@ -53,7 +53,7 @@ private
       elsif autenticated.role == "view"
         redirect_to view_path
       end
-    else
+    rescue
       flash[:warning] = 'Ingrese su usuario y contraseña (#2)'
       cookies.delete :session
       redirect_to login_path
@@ -61,8 +61,8 @@ private
   end
 
   def adminPermit
-    cookie = cookies.signed[:session]
-    if cookie
+    begin
+      cookie = cookies.signed[:session]
       code = Auth.find_by(sessioncode: cookie["code"])
       autenticated = User.find(code.user_id)
       checkip
@@ -70,7 +70,7 @@ private
         flash[:danger] = 'No tiene permiso'
         redirect_to login_path
       end  
-    else
+    rescue
       flash[:warning] = 'Ingrese su usuario y contraseña (#3)'
       cookies.delete :session
       redirect_to login_path
@@ -78,8 +78,8 @@ private
   end
 
   def votePermit
-    cookie = cookies.signed[:session]
-    if cookie
+    begin
+      cookie = cookies.signed[:session]
       code = Auth.find_by(sessioncode: cookie["code"])
       autenticated = User.find(code.user_id)
       checkip
@@ -87,7 +87,7 @@ private
         flash[:danger] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
-    else
+    rescue
       flash[:warning] = 'Ingrese su usuario y contraseña (#4)'
       cookies.delete :session
       redirect_to login_path
@@ -95,8 +95,8 @@ private
   end
 
   def viewPermit
-    cookie = cookies.signed[:session]
-    if cookie
+    begin
+      cookie = cookies.signed[:session]
       code = Auth.find_by(sessioncode: cookie["code"])
       autenticated = User.find(code.user_id)
       checkip
@@ -106,7 +106,7 @@ private
         flash[:danger] = 'No tiene permiso' if !autenticated
         redirect_to login_path
       end  
-    else
+    rescue
       flash[:warning] = 'Ingrese su usuario y contraseña (#5)'
       cookies.delete :session
       redirect_to login_path
