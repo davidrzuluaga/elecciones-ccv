@@ -12,6 +12,7 @@ def checkip
       @remote_ip ||= (@env["action_dispatch.remote_ip"] || ip).to_s
       p @ip
       p @remote_ip
+      p "hola"
       flash[:warning] = 'IP no coincide'
       #redirect_to root_path
     end
@@ -34,7 +35,7 @@ private
       end
     rescue 
       cookies.delete :session
-      flash[:warning] = 'Escriba un usuario y una contraseña' if !autenticated
+      flash[:warning] = 'Escriba un usuario y una contraseña..' if !autenticated
     end
   end
 
