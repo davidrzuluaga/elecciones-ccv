@@ -4,6 +4,7 @@ class CreateAuths < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :sessioncode
       t.string :log
+      t.string :note
 
       t.timestamps
     end

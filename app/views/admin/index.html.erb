@@ -5,8 +5,8 @@
       <div class="alert alert-<%=key %>"><%= value %></div>
   <% end %>
   <p><%= @userip %></p>
-  <p><%= @systemip %></p>
   <p><%= @remote_ip %></p>
+  <%= request.user_agent %>
   <div class="row">
     <div class="col-md-5">
       <div class="card" style="width: 18rem;">

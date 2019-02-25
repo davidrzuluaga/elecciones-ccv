@@ -8,7 +8,7 @@ class LoginController < ApplicationController
     user = User.find_by(user: params[:user])
     if user && user.authenticate(params[:password])
       sessioncode = SecureRandom.hex(10)
-      Auth.create(user: user, sessioncode: sessioncode, log: request.ip)
+      Auth.create(user: user, sessioncode: sessioncode, log: {ip: request.remote_ip, user_agent: request.user_agent}, note: params[:text])
       cookies.permanent.signed[:session] = {value: {code: sessioncode, usercode: user.logincode}, expires: Time.now + 6.hours}
       @current_user = user
       roledirection

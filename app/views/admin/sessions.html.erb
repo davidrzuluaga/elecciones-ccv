@@ -8,7 +8,8 @@
       <th scope="col"></th>
       <th scope="col">Usuario</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Dirección IP</th>
+      <th scope="col">IP</th>
+      <th scope="col">Nota</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +18,8 @@
       <td><%= link_to "Cerrar sesión", deletesession_path(sesion.id), class:"btn btn-danger" , method: :delete, data: { confirm: "¿Desea cerrar esta sesión?" } %></td>
       <td><%= user_by_id(sesion.user_id).user %></td>
       <td><%= sesion.created_at.strftime("%b %d a las %I:%M %p") %> </td>
-      <td><%= sesion.log %></td>
+      <td><%= eval(sesion.log)[:ip] %></td>
+      <td><%= sesion.note %></td>
     </tr>
   <% end %>
   </tbody>

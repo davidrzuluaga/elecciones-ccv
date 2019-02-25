@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_160451) do
     t.integer "user_id"
     t.string "sessioncode"
     t.string "log"
+    t.string "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_auths_on_user_id"

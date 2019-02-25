@@ -4,21 +4,18 @@ def checkip
   cookie = cookies.signed[:session]
   if cookie
     code = Auth.find_by(sessioncode: cookie["code"])
-    if code.log != request.ip
-      # code.destroy
-      # cookies.delete :session
-      # p code.log
-      # p request.ip
-      # @remote_ip ||= (@env["action_dispatch.remote_ip"] || ip).to_s
-      # p @remote_ip
-      # p "hola"
-      flash[:warning] = 'IP no coincide'
-      #redirect_to root_path
+    if eval(code.log)[:ip] != request.ip
+      if  eval(code.log)[:user_agent] != request.user_agent
+        code.destroy
+        cookies.delete :session
+        flash[:warning] = 'Error de coincidencia'
+        redirect_to root_path
+      end
     end
   else
-    # cookies.delete :session
+    cookies.delete :session
     flash[:warning] = 'Escriba un usuario y una contraseña (#6)'
-    # redirect_to login_path
+    redirect_to login_path
   end
 end
 
