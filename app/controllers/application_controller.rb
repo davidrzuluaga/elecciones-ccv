@@ -7,13 +7,13 @@ def checkip
     if code.log != request.ip
       # code.destroy
       # cookies.delete :session
-      p code.log
-      p request.ip
-      @ip ||= super
-      @remote_ip ||= (@env["action_dispatch.remote_ip"] || ip).to_s
-      p @ip
-      p @remote_ip
-      p "hola"
+      # p code.log
+      # p request.ip
+      # @ip ||= super
+      # @remote_ip ||= (@env["action_dispatch.remote_ip"] || ip).to_s
+      # p @ip
+      # p @remote_ip
+      # p "hola"
       flash[:warning] = 'IP no coincide'
       #redirect_to root_path
     end
