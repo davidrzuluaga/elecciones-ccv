@@ -36,7 +36,6 @@ private
         roledirection
       end
     else
-      flash[:warning] = 'Ingrese su usuario y contraseña (#1)'
       cookies.delete :session
     end
   end

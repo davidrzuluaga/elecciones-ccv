@@ -13,7 +13,8 @@ class LoginController < ApplicationController
       @current_user = user
       roledirection
     else
-      flash[:warning] = 'Ingrese su usuario y contraseña (#2)'
+      flash[:warning] = 'Ingrese su usuario y contraseña (#7)'
+      flash[:danger] = 'Usuario o Contraseña Incorrectos'
       cookies.delete :session
       redirect_to login_path
     end
@@ -27,7 +28,7 @@ class LoginController < ApplicationController
       cookies.delete :session
       redirect_to login_path
     else
-      flash[:warning] = 'Ingrese su usuario y contraseña (#3)'
+      flash[:warning] = 'Ingrese su usuario y contraseña (#8)'
       cookies.delete :session
       redirect_to login_path
     end
