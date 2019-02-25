@@ -3,11 +3,6 @@ class AdminController < ApplicationController
   layout "admin"
 
   def index
-    cookie = cookies.signed[:session]
-    code = Auth.find_by(sessioncode: cookie["code"])
-    @userip = code.log
-    @remote_ip = request.ip
-    @headers = request.headers
   end
   
   def voterslogout

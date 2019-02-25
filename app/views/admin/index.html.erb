@@ -4,11 +4,8 @@
   <% flash.each do |key, value| %>
       <div class="alert alert-<%=key %>"><%= value %></div>
   <% end %>
-  <p><%= @userip %></p>
-  <p><%= @remote_ip %></p>
-  <%= request.user_agent %>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-lg-5">
       <div class="card" style="width: 18rem;">
         <div class="card-header">
           <h3>Organizar</h3>
@@ -23,7 +20,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-lg-5">
       <div class="card" style="width: 18rem;">
         <div class="card-header">
           <h3>Administrar</h3>

@@ -1,7 +1,7 @@
 
 <div class="row students">
   <h4 class="total">Total estudiantes: <%= @totalstudents %> - Estudiantes que no han votado: <%= @leftstudents %></h4>
-    <div class="col-6 " id="tabla">
+    <div class="col-lg-6 " id="tabla">
         <div>
             <table class="table">
               <thead>
@@ -23,7 +23,7 @@
             </table>
         </div>
     </div>
-    <div class="col-6" id="errors">
+    <div class="col-lg-6" id="errors">
       <h4>Importar lista de estudiantes</h4>
         <%= form_tag createstudent_path, multipart: true do %>
           <%= file_field_tag :file %>

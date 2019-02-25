@@ -5,7 +5,7 @@
 <%= link_to  "Modificar nombre", group_path, class: "btn btn-primary" %>
 <%= link_to "Eliminar Grupo", deletegroup_path, class: "btn btn-danger", method: :delete, data: { confirm: "¿Eliminar?" }%>
 <div class="row">
-  <div class="col-5" id="tabla">
+  <div class="col-lg-5" id="tabla">
     <% @positions.each do |position| %></p>
       <h3><%= position.name %></h3>
       <table class="table" >
@@ -27,7 +27,7 @@
       <%end%>
     </div>
     <% if @voters.count > 0 %>
-      <div class="col-6" id="tabla">
+      <div class="col-lg-6" id="tabla">
         <h3>Estudiantes</h3>
         <table class="table">
           <thead>

@@ -5,7 +5,7 @@ def checkip
   if cookie
     code = Auth.find_by(sessioncode: cookie["code"])
     if eval(code.log)[:ip] != request.ip
-      if  eval(code.log)[:user_agent] != request.user_agent
+      if eval(code.log)[:user_agent] != request.user_agent
         code.destroy
         cookies.delete :session
         flash[:warning] = 'Error de coincidencia'

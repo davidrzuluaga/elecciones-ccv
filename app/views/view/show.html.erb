@@ -2,7 +2,7 @@
 <%= link_to 'Volver', view_path %>
 <h2>Resultado de Elecciones por <%= @position.name%></h2>
 <div class="row" id="result">
-  <div class="col-7">
+  <div class="col-lg-7">
     <table class="table" id="tabla">
       <thead>
         <tr>
@@ -23,7 +23,7 @@
       <%= pie_chart @chart, refresh: 60 %>
     </div>
   </div>
-  <div class="col-5">
+  <div class="col-lg-5">
      <div id="chart">
       <h4>Votos por hora del dia</h4>
       <%= bar_chart @votesbyhour %>
