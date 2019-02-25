@@ -2,10 +2,17 @@ class ViewController < ApplicationController
   before_action :viewPermit
 
   def index
-    code = Auth.find_by(sessioncode: cookies.signed[:session]["code"])
-    autenticated = User.find(code.user_id)
-    @autenticated = autenticated.role if autenticated  
-    @positions = Position.order('name asc')
+    cookie = cookies.signed[:session]
+    if cookie
+      code = Auth.find_by(sessioncode: cookie["code"])
+      autenticated = User.find(code.user_id)
+      @autenticated = autenticated.role if autenticated  
+      @positions = Position.order('name asc')
+    else
+      flash[:warning] = 'Ingrese su usuario y contraseña (ViewIndex)'
+      cookies.delete :session
+      redirect_to login_path
+    end
   end
   
   def show

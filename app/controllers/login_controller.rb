@@ -13,15 +13,24 @@ class LoginController < ApplicationController
       @current_user = user
       roledirection
     else
-      flash[:success] = 'Ingrese su usuario y contraseña....'
+      flash[:warning] = 'Ingrese su usuario y contraseña (#2)'
+      cookies.delete :session
       redirect_to login_path
     end
   end
 
   def destroy
-    Auth.find_by(sessioncode: cookies.signed[:session]["code"]).destroy
-    cookies.delete :session
-    redirect_to login_path
+    cookie = cookies.signed[:session]
+    if cookie
+      code = Auth.find_by(sessioncode: cookie["code"])
+      Auth.find_by(sessioncode: cookies.signed[:session]["code"]).destroy
+      cookies.delete :session
+      redirect_to login_path
+    else
+      flash[:warning] = 'Ingrese su usuario y contraseña (#3)'
+      cookies.delete :session
+      redirect_to login_path
+    end
   end
 
 end
