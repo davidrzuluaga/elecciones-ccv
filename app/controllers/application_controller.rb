@@ -9,9 +9,7 @@ def checkip
       # cookies.delete :session
       # p code.log
       # p request.ip
-      # @ip ||= super
       # @remote_ip ||= (@env["action_dispatch.remote_ip"] || ip).to_s
-      # p @ip
       # p @remote_ip
       # p "hola"
       flash[:warning] = 'IP no coincide'
