@@ -13,11 +13,11 @@ def checkip
       p @ip
       p @remote_ip
       flash[:warning] = 'IP no coincide'
-      redirect_to root_path
+      #redirect_to root_path
     end
   else
     cookies.delete :session
-    flash[:warning] = 'Escriba un usuario y una contraseña'
+    flash[:warning] = 'Escriba un usuario y una contraseña...'
     redirect_to login_path
   end
 end
